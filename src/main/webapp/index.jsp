@@ -1,3 +1,5 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +25,8 @@
 
         <header class="main">
             <div class="logo_line"></div>
+            <spring:message text="Hi "/> <sec:authentication property="name"/> <sec:authentication property="authorities"/>
+            <a href="logout">Log out</a>
             <img src="img/logo.png"/>
             <button class="but" onclick="location.href='shop.html'"> Make your own <br>burger now!</button>
         </header>
@@ -33,6 +37,11 @@
     </section>
 
 </div>
-
+<!-- don't cached jsp page -->
+<%
+    response.setHeader("pragma","no-cache");
+    response.setHeader("Cache-control","no-cache, no-store, must-revalidate");
+    response.setHeader("Expires","0");
+%>
 </body>
 </html>
