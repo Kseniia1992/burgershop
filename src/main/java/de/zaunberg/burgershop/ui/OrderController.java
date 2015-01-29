@@ -1,14 +1,11 @@
 package de.zaunberg.burgershop.ui;
 
-import de.zaunberg.burgershop.dao.UserDao;
-import de.zaunberg.burgershop.dao.UserDaoImpl;
-import de.zaunberg.burgershop.model.User;
+import de.zaunberg.burgershop.model.ShopUser;
 import de.zaunberg.burgershop.model.UserOrder;
 import de.zaunberg.burgershop.service.Order;
 import de.zaunberg.burgershop.service.ShopService;
 import de.zaunberg.burgershop.service.ShopableItem;
 import net.anotheria.util.NumberUtils;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +28,6 @@ public class OrderController {
     @Autowired
     private ShopService service;
 
-    @Autowired
-    private UserDao userDao;
-
     private static Logger log = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "/order.html")
@@ -50,24 +44,16 @@ public class OrderController {
         }
         request.setAttribute("ordereditems", orderedItems);
         request.setAttribute("totalPrice", NumberUtils.currencyFormat((double) order.getTotalPrice() / 100, ','));
-  /*
-        String username = request.getParameter("username");
-        HttpSession session = request.getSession();
-        session.setAttribute("username",username);
-        String uname = (String) session.getAttribute("username");
-        System.out.println(uname);
-        UserDaoImpl udi = new UserDaoImpl();
-        User u = userDao.findUserByName("user1"); */
 
         Principal principal = request.getUserPrincipal();
-        User u = userDao.findUserByName(principal.getName());
+        ShopUser u = service.findUserByName(principal.getName());
 
         UserOrder userOrder = new UserOrder();
         userOrder.setChoice1(choice1);
         userOrder.setChoice2(choice2);
         userOrder.setChoice3(choice3);
-        userOrder.setTotalprice(order.getTotalPrice() / 100);
-        userOrder.setUser(u);
+        userOrder.setTotalprice(NumberUtils.currencyFormat((double) order.getTotalPrice() / 100, ','));
+        userOrder.setShopUser(u);
         service.add(userOrder);
 
         return "confirmation";

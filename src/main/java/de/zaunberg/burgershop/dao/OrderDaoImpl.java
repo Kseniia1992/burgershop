@@ -1,9 +1,8 @@
 package de.zaunberg.burgershop.dao;
 
 import de.zaunberg.burgershop.model.UserOrder;
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -23,10 +22,10 @@ public class OrderDaoImpl implements OrderDao{
 
     @Override
     public List<UserOrder> findUserOrder(String username) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserOrder.class);
-        criteria.add(Restrictions.eqProperty("username", username));
-        List<UserOrder> results = criteria.list();
-        return results;
+        Query query = sessionFactory.getCurrentSession().createQuery(" from UserOrder uo inner join uo.shopUser as u where u.username = :username");
+        query.setParameter("username",username);
+        List result = query.list();
+        return result;
     }
 
 }

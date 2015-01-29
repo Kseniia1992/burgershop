@@ -200,6 +200,51 @@ header.main h1 {
     font-size: 36px;
     margin: 2px 35px 0 20px;
 }
+#orders{
+    top:320px;
+}
+.menu{
+    margin-left: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.table{
+    margin-top: 60px;
+    margin-left: 400px;
+    display: table;
+    background-color: #559814;
+    border: 1px solid #ffffff;
+    font-size: 20px;
+    font-family: channel_slanted_2regular;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+    -webkit-box-shadow: 11px 11px 8px 0px rgba(50, 84, 49, 0.79);
+    -moz-box-shadow:    11px 11px 8px 0px rgba(50, 84, 49, 0.79);
+    box-shadow:         11px 11px 8px 0px rgba(50, 84, 49, 0.79);
+}
+
+.tr{
+    padding: 3px;
+    display: table-row;
+    border: 1px solid #ffffff;
+}
+
+.th{
+   padding: 3px;
+   display: table-cell;
+   border: 1px solid #ffffff;
+   font-weight: bold;
+
+}
+.td {
+    padding: 3px;
+    display: table-cell;
+    border: 1px solid #ffffff;
+}
 
 #step_name {
     font-size: 31px;

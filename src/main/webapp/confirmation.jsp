@@ -25,7 +25,9 @@
     <div class="logo_line"></div>
     <img src="img/logo.png"/>
 </header>
-
+<div class="menu">
+    <a href="index.jsp" style="text-decoration: none; color: #ffffff">Menu</a>
+</div>
 <div class="lightbox order-box" style="display: block;">
     <div class="oder_now">
         <p>You ordered</p>
@@ -45,9 +47,5 @@
         </p>
     </div>
 </div>
-
-
-
-
 </body>
 </html>

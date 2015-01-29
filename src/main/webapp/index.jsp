@@ -25,10 +25,13 @@
 
         <header class="main">
             <div class="logo_line"></div>
-            <spring:message text="Hi "/> <sec:authentication property="name"/> <sec:authentication property="authorities"/>
-            <a href="logout">Log out</a>
+            <div class="menu">
+                <spring:message text="Hi "/> <sec:authentication property="name"/> <sec:authentication property="authorities"/>
+                <a href="logout" style="text-decoration: none; color: #ffffff">  Log out</a>
+            </div>
             <img src="img/logo.png"/>
             <button class="but" onclick="location.href='shop.html'"> Make your own <br>burger now!</button>
+            <button id="orders" class="but" onclick="location.href='userOrders.html'"> Orders <br></button>
         </header>
     </div>
 

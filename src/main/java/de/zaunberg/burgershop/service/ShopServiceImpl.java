@@ -1,6 +1,10 @@
 package de.zaunberg.burgershop.service;
 
 import de.zaunberg.burgershop.dao.OrderDao;
+import de.zaunberg.burgershop.dao.RoleDao;
+import de.zaunberg.burgershop.dao.UserDao;
+import de.zaunberg.burgershop.model.Role;
+import de.zaunberg.burgershop.model.ShopUser;
 import de.zaunberg.burgershop.model.UserOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private RoleDao roleDao;
 
     private LinkedList<ShopableItem> items;
 
@@ -74,14 +84,62 @@ public class ShopServiceImpl implements ShopService {
         throw new IllegalArgumentException("No such shopable item: "+name);
     }
 
+    /**
+     * Adds order of user into data base
+     * @param userOrder - order object
+     */
     @Transactional
     public void add(UserOrder userOrder) {
         orderDao.add(userOrder);
     }
 
+    /**
+     * Finds orders of user by user name
+     * @param username - user name
+     * @return list of orders
+     */
     @Transactional
     public List<UserOrder> findUserOrder(String username) {
         return orderDao.findUserOrder(username);
     }
 
+    /**
+     * Finds user by user name
+     * @param username - user name
+     * @return user object
+     */
+    @Transactional
+    public ShopUser findUserByName(String username) {
+        return userDao.findUserByName(username);
+    }
+
+    /**
+     * Adds user into data base
+     * @param shopUser - user object
+     */
+    @Transactional
+    public void add(ShopUser shopUser) {
+        userDao.add(shopUser);
+    }
+
+    /**
+     * Adds user role into data base
+     * @param role - role object
+     */
+    @Transactional
+    public void add(Role role) {
+        roleDao.add(role);
+    }
+
+    /**
+     * Finds role by id
+     * @param role_id - id
+     * @return role object
+     */
+    @Transactional
+    public Role findRoleById(int role_id) {
+        return roleDao.findRoleById(role_id);
+    }
+
 }
+

@@ -1,8 +1,7 @@
 package de.zaunberg.burgershop.service;
 
-import de.zaunberg.burgershop.dao.UserDao;
 import de.zaunberg.burgershop.model.Role;
-import de.zaunberg.burgershop.model.User;
+import de.zaunberg.burgershop.model.ShopUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -17,30 +16,35 @@ import java.util.List;
 
 
 /**
- * This class will be used by Spring Security to pickup users
- * and authenticate them.
+ * This class will be used by Spring Security for lookup of users
+ * and authenticating them.
  * @author ksolodovnik
  */
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Autowired
-    private UserDao userDao;
+    private ShopService service;
 
+    /**
+     * Creates spring security user instance with populated values
+     * @param username - login
+     * @return secure user
+     * @throws UsernameNotFoundException
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findUserByName(username);
+        ShopUser shopUser = service.findUserByName(username);
 
-        if(user!=null) {
-            String password = user.getPassword();
+        if(shopUser !=null) {
+            String password = shopUser.getPassword();
             //populate user roles
             List<GrantedAuthority> authorityCollection = new ArrayList<GrantedAuthority>();
-            for (Role role : user.getRoles()) {
+            for (Role role : shopUser.getRoles()) {
                 authorityCollection.add(new GrantedAuthorityImpl(role.getRoleName()));
             }
-
-            //create user Spring Security User object
+            //create Spring Security User object
             org.springframework.security.core.userdetails.User securityUser = new
                     org.springframework.security.core.userdetails.User(username, password,authorityCollection);
             return securityUser;
@@ -49,4 +53,5 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         }
     }
 }
+
 

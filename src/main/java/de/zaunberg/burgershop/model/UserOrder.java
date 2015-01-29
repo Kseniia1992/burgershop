@@ -1,27 +1,38 @@
 package de.zaunberg.burgershop.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
+ * User order entity
  * @author ksolodovnik
  */
 
 @Entity
 @Table(name = "UserOrder")
-public class UserOrder {
+public class UserOrder implements Serializable{
+
+    /** id */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int order_id;
 
+    /** first choice in menu for burger */
     private String choice1;
+
+    /** second choice in menu for burger */
     private String choice2;
+
+   /** third choice in menu for burger */
     private String choice3;
 
-    private int totalprice;
+    /** total price for burger */
+    private String totalprice;
 
+    /** user */
     @ManyToOne
     @JoinColumn(name = "username")
-    private User user;
+    private ShopUser shopUser;
 
     public int getOrder_id() {
         return order_id;
@@ -55,19 +66,19 @@ public class UserOrder {
         this.choice3 = choice3;
     }
 
-    public int getTotalprice() {
+    public String getTotalprice() {
         return totalprice;
     }
 
-    public void setTotalprice(int totalprice) {
+    public void setTotalprice(String totalprice) {
         this.totalprice = totalprice;
     }
 
-    public User getUser() {
-        return user;
+    public ShopUser getShopUser() {
+        return shopUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setShopUser(ShopUser shopUser) {
+        this.shopUser = shopUser;
     }
 }

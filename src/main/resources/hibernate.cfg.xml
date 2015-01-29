@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <mapping class="de.zaunberg.burgershop.model.Role"/>
-        <mapping class="de.zaunberg.burgershop.model.User"/>
+        <mapping class="de.zaunberg.burgershop.model.ShopUser"/>
         <mapping class="de.zaunberg.burgershop.model.UserOrder"/>
     </session-factory>
 </hibernate-configuration>

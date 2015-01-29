@@ -8,7 +8,6 @@ import java.util.List;
  * @author ksolodovnik
  */
 public interface OrderDao {
-
     public void add(UserOrder userOrder);
     public List<UserOrder> findUserOrder(String username);
 }

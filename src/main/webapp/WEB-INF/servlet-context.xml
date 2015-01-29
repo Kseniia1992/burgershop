@@ -23,9 +23,9 @@
 
     <bean class="de.zaunberg.burgershop.service.ShopServiceImpl" id="ShopService"/>
 
-    <!--   <bean class="de.zaunberg.burgershop.ui.AppConfig" id="viewResolver"/>       -->
-
     <bean class="de.zaunberg.burgershop.dao.UserDaoImpl" id="userDao"/>
+
+    <bean class="de.zaunberg.burgershop.dao.RoleDaoImpl" id="roleDao"/>
 
     <bean class="de.zaunberg.burgershop.dao.OrderDaoImpl" id="orderDao"/>
 
@@ -69,24 +69,17 @@
     </bean>
 
     <!--Spring security -->
+    <security:http pattern="/login.jsp" security="none"/>
+    <security:http pattern="/register.jsp" security="none"/>
+    <security:http pattern="/register.html" security="none"/>
+
     <security:http use-expressions="true">
-        <!--  <security:intercept-url pattern="/**" access="hasRole('Admin')" />
-          <security:intercept-url pattern="/**" access="hasRole('User')" />      -->
         <security:intercept-url pattern="/**" access="hasAnyRole('User','Admin')" />
-        <security:form-login/>
-        <security:logout logout-url="/logout" logout-success-url="/index"/>
+        <security:form-login login-page="/login.jsp"  default-target-url="/index.jsp"
+                             always-use-default-target="true" authentication-failure-url="/login?error=true"/>
+
+        <security:logout logout-url="/logout" logout-success-url="/login.jsp"/>
     </security:http>
-
-    <!--
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="user1" password="123" authorities="Admin,User"/>
-
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>
- -->
 
     <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userDetailsService"/>
@@ -102,9 +95,7 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsService">
-
         </security:authentication-provider>
     </security:authentication-manager>
-
 
 </beans>

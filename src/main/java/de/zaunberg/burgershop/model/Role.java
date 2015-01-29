@@ -1,27 +1,36 @@
 package de.zaunberg.burgershop.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 /**
+ * User role entity
  * @author ksolodovnik
  */
 
 @Entity
-public class Role {
+public class Role implements Serializable {
+
+    /** id */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int role_id;
+
+    /** role */
+    @NotNull
     private String roleName;
 
+    /** list of users */
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-    private List<User> users;
+    private List<ShopUser> shopUsers;
 
-    public int getId() {
+    public int getRole_id() {
         return role_id;
     }
 
-    public void setId(int id) {
+    public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
 
@@ -33,11 +42,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<ShopUser> getShopUsers() {
+        return shopUsers;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setShopUsers(List<ShopUser> shopUsers) {
+        this.shopUsers = shopUsers;
     }
 }

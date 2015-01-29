@@ -1,10 +1,11 @@
 package de.zaunberg.burgershop.dao;
 
-import de.zaunberg.burgershop.model.User;
+import de.zaunberg.burgershop.model.ShopUser;
 
 /**
  * @author ksolodovnik
  */
 public interface UserDao {
-   public User findUserByName(String username);
+   public ShopUser findUserByName(String username);
+   public void add(ShopUser shopUser);
 }
