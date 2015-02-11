@@ -8,8 +8,8 @@
     <title>Login</title>
 </head>
 <body>
- <form action="/j_spring_security_check" method="POST" >
- <h1>Enter your credentials</h1>
+ <form action="/burgershop/j_spring_security_check" method="POST" >
+ <h1>Enter username and password</h1>
 
  <table>
      <tr>
@@ -22,7 +22,7 @@
      </tr>
      <tr>
          <td colspan="2" align="left"><input type="submit" value="Login"/> </td>
-         <a href="/register.html" onclick="location.href='register.html'">Registration</a>
+         <a href="/burgershop/register.html" onclick="location.href='register.html'">Registration</a>
      </tr>
  </table>
 </form>

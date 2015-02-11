@@ -12,9 +12,9 @@
     </style>
 </head>
 <body>
-<form:form commandName="user" method="POST" action="/register.html" >
+<form:form commandName="user" method="POST" action="/burgershop/register.html" >
     <h1>Enter your credentials</h1>
-    <a href="/login.html" onclick="location.href='login.html'">Authorization</a>
+    <a href="/burgershop/login.html" onclick="location.href='login.html'">Authorization</a>
     <table>
         <tr>
             <td><form:label path="username">Username</form:label></td>
